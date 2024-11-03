@@ -1,0 +1,230 @@
+#remover linhas de textos que não serão usadas
+
+#filtros de NA da coluna Tipos de escolas
+#2018
+copy_def_2018 <- copy_def_2018[which(is.na(copy_def_2018$Tipos_Escola)!=TRUE),]
+copy_idade_2018 <- copy_idade_2018[which(is.na(copy_idade_2018$Tipos_Escola)!=TRUE),]
+copy_sexo_2018 <- copy_sexo_2018[which(is.na(copy_sexo_2018$Tipos_Escola)!=TRUE),]
+copy_raca_2018 <- copy_raca_2018[which(is.na(copy_raca_2018$Tipos_Escola)!=TRUE),]
+copy_presencial_2018 <- copy_presencial_2018[which(is.na(copy_presencial_2018$Tipos_Escola)!=TRUE),]
+raca_2018_numerica <- raca_2018_numerica[which(is.na(raca_2018_numerica$Tipos_Escola)!=TRUE),]
+
+#2019
+copy_def_2019 <- copy_def_2019[which(is.na(copy_def_2019$Tipos_Escola)!=TRUE),]
+copy_idade_2019 <- copy_idade_2019[which(is.na(copy_idade_2019$Tipos_Escola)!=TRUE),]
+copy_sexo_2019 <- copy_sexo_2019[which(is.na(copy_sexo_2019$Tipos_Escola)!=TRUE),]
+copy_raca_2019 <- copy_raca_2019[which(is.na(copy_raca_2019$Tipos_Escola)!=TRUE),]
+copy_presencial_2019 <- copy_presencial_2019[which(is.na(copy_presencial_2019$Tipos_Escola)!=TRUE),]
+
+#2020
+copy_def_2020 <- copy_def_2020[which(is.na(copy_def_2020$Tipos_Escola)!=TRUE),]
+copy_idade_2020 <- copy_idade_2020[which(is.na(copy_idade_2020$Tipos_Escola)!=TRUE),]
+copy_sexo_2020 <- copy_sexo_2020[which(is.na(copy_sexo_2020$Tipos_Escola)!=TRUE),]
+copy_raca_2020 <- copy_raca_2020[which(is.na(copy_raca_2020$Tipos_Escola)!=TRUE),]
+copy_presencial_2020 <- copy_presencial_2020[which(is.na(copy_presencial_2020$Tipos_Escola)!=TRUE),]
+
+#indicadores
+indicadores <- indicadores[which(is.na(indicadores$categoria_administrativa)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$nome_instituicao)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$codigo_regiao)!=TRUE),]
+
+indicadores <- indicadores[which(is.na(indicadores$modalidade_ensino)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$organizacao_academica)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$nome_curso)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$grau_academico)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$ano_referencia)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$qtde_ingressante)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$qtde_permanencia)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$qtde_concluinte)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$qtde_desistencia)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$qtde_falecido)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$taxa_permanencia)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$taxa_conclusao_acumulada)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$taxa_desistencia_acumulada)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$taxa_conclusao_anual)!=TRUE),]
+indicadores <- indicadores[which(is.na(indicadores$taxa_desistencia_anual)!=TRUE),]
+
+
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$categoria_administrativa)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$codigo_instituicao)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$codigo_regiao)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$grau_academico)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$modalidade_ensino)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$ano_referencia)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$qt_ingressante)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$qt_permanencia)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$qt_concluinte)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$qt_desistencia)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$taxa_permanencia)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$taxa_conclusao_acumulada)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$taxa_desistencia_acumulada)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$taxa_conclusao_anual)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[which(is.na(indicadores_numerica$taxa_desistencia_anual)!=TRUE),]
+indicadores_numerica <- indicadores_numerica[-1,]
+
+#filtrar coluna modalidade de ensino e criar duas novas tabelas
+indicadores_presencial <- indicadores_numerica[which((indicadores_numerica$modalidade_ensino)==1),]
+indicadores_distancia <- indicadores_numerica[which((indicadores_numerica$modalidade_ensino)==2),]
+
+#remover linhas onde escola é igual a pública, pois pública é igual a soma de federal, 
+#municipal e estadual
+#2018
+copy_def_2018 <- copy_def_2018[which((copy_def_2018$Tipos_Escola)!="Pública"),]
+copy_idade_2018 <- copy_idade_2018[which((copy_idade_2018$Tipos_Escola)!='Pública'),]
+copy_sexo_2018 <- copy_sexo_2018[which((copy_sexo_2018$Tipos_Escola)!='Pública'),]
+copy_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Tipos_Escola)!='Pública'),]
+copy_presencial_2018 <- copy_presencial_2018[which((copy_presencial_2018$Tipos_Escola)!='Pública'),]
+copy_presencial_2018 <- copy_presencial_2018[which((copy_presencial_2018$Estados)!='Brazil'),]
+raca_2018_numerica <- raca_2018_numerica[which((raca_2018_numerica$Tipos_Escola)!='Pública'),]
+
+#2019
+copy_def_2019 <- copy_def_2019[which((copy_def_2019$Tipos_Escola)!='Pública'),]
+copy_idade_2019 <- copy_idade_2019[which((copy_idade_2019$Tipos_Escola)!='Pública'),]
+copy_sexo_2019 <- copy_sexo_2019[which((copy_sexo_2019$Tipos_Escola)!='Pública'),]
+copy_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Tipos_Escola)!='Pública'),]
+copy_presencial_2019 <- copy_presencial_2019[which((copy_presencial_2019$Tipos_Escola)!='Pública'),]
+
+
+#2020
+copy_def_2020 <- copy_def_2020[which((copy_def_2020$Tipos_Escola)!='Pública'),]
+copy_idade_2020 <- copy_idade_2020[which((copy_idade_2020$Tipos_Escola)!='Pública'),]
+copy_sexo_2020 <- copy_sexo_2020[which((copy_sexo_2020$Tipos_Escola)!='Pública'),]
+copy_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Tipos_Escola)!='Pública'),]
+copy_presencial_2020 <- copy_presencial_2020[which((copy_presencial_2020$Tipos_Escola)!='Pública'),]
+
+#remover linhas com as regioes para ficar somente os estados
+#2018
+copy_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)!="Brazil"),]
+copy_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)!="Norte"),]
+copy_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)!="Nordeste"),]
+copy_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)!="Sul"),]
+copy_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)!="Sudeste"),]
+copy_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)!="Centro-Oeste"),]
+copy_idade_2018 <- copy_idade_2018[which((copy_idade_2018$Estados)!="Brazil"),]
+copy_idade_2018 <- copy_idade_2018[which((copy_idade_2018$Estados)!="Norte"),]
+copy_idade_2018 <- copy_idade_2018[which((copy_idade_2018$Estados)!="Nordeste"),]
+copy_idade_2018 <- copy_idade_2018[which((copy_idade_2018$Estados)!="Sul"),]
+copy_idade_2018 <- copy_idade_2018[which((copy_idade_2018$Estados)!="Sudeste"),]
+copy_idade_2018 <- copy_idade_2018[which((copy_idade_2018$Estados)!="Centro-Oeste"),]
+copy_sexo_2018 <- copy_sexo_2018[which((copy_sexo_2018$Estados)!="Brazil"),]
+copy_sexo_2018 <- copy_sexo_2018[which((copy_sexo_2018$Estados)!="Norte"),]
+copy_sexo_2018 <- copy_sexo_2018[which((copy_sexo_2018$Estados)!="Nordeste"),]
+copy_sexo_2018 <- copy_sexo_2018[which((copy_sexo_2018$Estados)!="Sul"),]
+copy_sexo_2018 <- copy_sexo_2018[which((copy_sexo_2018$Estados)!="Sudeste"),]
+copy_sexo_2018 <- copy_sexo_2018[which((copy_sexo_2018$Estados)!="Centro-Oeste"),]
+copy_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)!="Brazil"),]
+copy_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)!="Norte"),]
+copy_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)!="Nordeste"),]
+copy_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)!="Sul"),]
+copy_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)!="Sudeste"),]
+copy_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)!="Centro-Oeste"),]
+raca_2018_numerica <- raca_2018_numerica[which((raca_2018_numerica$Estados)!="Brazil"),]
+raca_2018_numerica <- raca_2018_numerica[which((raca_2018_numerica$Estados)!="Norte"),]
+raca_2018_numerica <- raca_2018_numerica[which((raca_2018_numerica$Estados)!="Nordeste"),]
+raca_2018_numerica <- raca_2018_numerica[which((raca_2018_numerica$Estados)!="Sul"),]
+raca_2018_numerica <- raca_2018_numerica[which((raca_2018_numerica$Estados)!="Sudeste"),]
+raca_2018_numerica <- raca_2018_numerica[which((raca_2018_numerica$Estados)!="Centro-Oeste"),]
+
+
+Norte_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)=="Norte"),]
+Nordeste_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)=="Nordeste"),]
+Sul_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)=="Sul"),]
+Sudeste_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)=="Sudeste"),]
+COeste_def_2018 <- copy_def_2018[which((copy_def_2018$Estados)=="Centro-Oeste"),]
+
+Norte_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)=="Norte"),]
+Nordeste_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)=="Nordeste"),]
+Sul_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)=="Sul"),]
+Sudeste_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)=="Sudeste"),]
+COeste_raca_2018 <- copy_raca_2018[which((copy_raca_2018$Estados)=="Centro-Oeste"),]
+
+regioes <- c("Norte", "Nordeste", "Sudeste", "Sul", "Centro-Oeste")
+
+Presencial2018 <- copy_presencial_2018[copy_presencial_2018$Estados %in% regioes, ]
+Presencial_Estados <- Presencial2018[,-2]
+Presencial_Escolas <- Presencial2018[,-1]
+
+copy_presencial_2018 <- copy_presencial_2018[which((copy_presencial_2018$Estados)!="Norte"),]
+copy_presencial_2018 <- copy_presencial_2018[which((copy_presencial_2018$Estados)!="Nordeste"),]
+copy_presencial_2018 <- copy_presencial_2018[which((copy_presencial_2018$Estados)!="Sul"),]
+copy_presencial_2018 <- copy_presencial_2018[which((copy_presencial_2018$Estados)!="Sudeste"),]
+copy_presencial_2018 <- copy_presencial_2018[which((copy_presencial_2018$Estados)!="Centro-Oeste"),]
+
+
+#2019
+copy_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)!="Brazil"),]
+copy_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)!="Norte"),]
+copy_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)!="Nordeste"),]
+copy_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)!="Sul"),]
+copy_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)!="Sudeste"),]
+copy_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)!="Centro-Oeste"),]
+copy_idade_2019 <- copy_idade_2019[which((copy_idade_2019$Estados)!="Brazil"),]
+copy_idade_2019 <- copy_idade_2019[which((copy_idade_2019$Estados)!="Norte"),]
+copy_idade_2019 <- copy_idade_2019[which((copy_idade_2019$Estados)!="Nordeste"),]
+copy_idade_2019 <- copy_idade_2019[which((copy_idade_2019$Estados)!="Sul"),]
+copy_idade_2019 <- copy_idade_2019[which((copy_idade_2019$Estados)!="Sudeste"),]
+copy_idade_2019 <- copy_idade_2019[which((copy_idade_2019$Estados)!="Centro-Oeste"),]
+copy_sexo_2019 <- copy_sexo_2019[which((copy_sexo_2019$Estados)!="Brazil"),]
+copy_sexo_2019 <- copy_sexo_2019[which((copy_sexo_2019$Estados)!="Norte"),]
+copy_sexo_2019 <- copy_sexo_2019[which((copy_sexo_2019$Estados)!="Nordeste"),]
+copy_sexo_2019 <- copy_sexo_2019[which((copy_sexo_2019$Estados)!="Sul"),]
+copy_sexo_2019 <- copy_sexo_2019[which((copy_sexo_2019$Estados)!="Sudeste"),]
+copy_sexo_2019 <- copy_sexo_2019[which((copy_sexo_2019$Estados)!="Centro-Oeste"),]
+copy_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)!="Brazil"),]
+copy_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)!="Norte"),]
+copy_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)!="Nordeste"),]
+copy_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)!="Sul"),]
+copy_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)!="Sudeste"),]
+copy_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)!="Centro-Oeste"),]
+
+
+Norte_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)=="Norte"),]
+Nordeste_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)=="Nordeste"),]
+Sul_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)=="Sul"),]
+Sudeste_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)=="Sudeste"),]
+COeste_def_2019 <- copy_def_2019[which((copy_def_2019$Estados)=="Centro-Oeste"),]
+
+
+Norte_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)=="Norte"),]
+Nordeste_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)=="Nordeste"),]
+Sul_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)=="Sul"),]
+Sudeste_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)=="Sudeste"),]
+COeste_raca_2019 <- copy_raca_2019[which((copy_raca_2019$Estados)=="Centro-Oeste"),]
+
+#2020
+copy_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)!="Brazil"),]
+copy_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)!="Norte"),]
+copy_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)!="Nordeste"),]
+copy_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)!="Sul"),]
+copy_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)!="Sudeste"),]
+copy_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)!="Centro-Oeste"),]
+copy_idade_2020 <- copy_idade_2020[which((copy_idade_2020$Estados)!="Brazil"),]
+copy_idade_2020 <- copy_idade_2020[which((copy_idade_2020$Estados)!="Norte"),]
+copy_idade_2020 <- copy_idade_2020[which((copy_idade_2020$Estados)!="Nordeste"),]
+copy_idade_2020 <- copy_idade_2020[which((copy_idade_2020$Estados)!="Sul"),]
+copy_idade_2020 <- copy_idade_2020[which((copy_idade_2020$Estados)!="Sudeste"),]
+copy_idade_2020 <- copy_idade_2020[which((copy_idade_2020$Estados)!="Centro-Oeste"),]
+copy_sexo_2020 <- copy_sexo_2020[which((copy_sexo_2020$Estados)!="Brazil"),]
+copy_sexo_2020 <- copy_sexo_2020[which((copy_sexo_2020$Estados)!="Norte"),]
+copy_sexo_2020 <- copy_sexo_2020[which((copy_sexo_2020$Estados)!="Nordeste"),]
+copy_sexo_2020 <- copy_sexo_2020[which((copy_sexo_2020$Estados)!="Sul"),]
+copy_sexo_2020 <- copy_sexo_2020[which((copy_sexo_2020$Estados)!="Sudeste"),]
+copy_sexo_2020 <- copy_sexo_2020[which((copy_sexo_2020$Estados)!="Centro-Oeste"),]
+copy_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)!="Brazil"),]
+copy_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)!="Norte"),]
+copy_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)!="Nordeste"),]
+copy_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)!="Sul"),]
+copy_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)!="Sudeste"),]
+copy_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)!="Centro-Oeste"),]
+
+Norte_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)=="Norte"),]
+Nordeste_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)=="Nordeste"),]
+Sul_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)=="Sul"),]
+Sudeste_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)=="Sudeste"),]
+COeste_def_2020 <- copy_def_2020[which((copy_def_2020$Estados)=="Centro-Oeste"),]
+
+Norte_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)=="Norte"),]
+Nordeste_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)=="Nordeste"),]
+Sul_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)=="Sul"),]
+Sudeste_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)=="Sudeste"),]
+COeste_raca_2020 <- copy_raca_2020[which((copy_raca_2020$Estados)=="Centro-Oeste"),]
